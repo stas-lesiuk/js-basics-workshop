@@ -5,3 +5,5 @@ eg:
 var orders = [{ id: 1, user: 'Some user' }, {id: 3, user: 'third user'}];
 f(orders, 3); //true
 f(orders, 2); //false
+
+3 - show 3 methods of onclick handling. then some task regarding

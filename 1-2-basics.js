@@ -67,4 +67,5 @@ while(arithmeticalProgressionObj.sum) {
 
 
 // 4. HANDFUL METHODS
-// array - split, splice, slice, indexOf
+// array - splice, slice, indexOf, push, pop, concat
+// string - split, includes, indexOf

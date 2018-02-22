@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 3 - event listeners</title>
+</head>
+<body>
+
+    <!-- FIRST WAY TO ATTACH EVENT - see onclick listener below -->
+    <div id="first" onclick="action1('some parameter');">First element content</div>
+    <div id="second">Second</div>
+    <div id="third">Third</div>
+</body>
+<script>
+
+    /* SECOND WAY TO ATTACH EVENT - see how js get's element reference and attaches click*/
+    document.getElementById('second').onclick = action2;
+    /*
+    you can also the notation as in below example, but the named function is better (clean code)
+    document.getElementById('second').onclick = function() {
+       ...
+    };
+     */
+
+    /*
+    THIRD WAY TO ATTACH EVENT (PREFERABLE) - add listener
+    */
+    document.getElementById('third').addEventListener("click", action3);
+
+    //handlers
+    function action1(param) {
+      alert('action 1 received param: ' + param);
+    }
+    function action2(param) {
+      alert('action 2 received param: ' + param);
+    }
+    function action3(param) {
+      alert('action 3 received param: ' + param);
+    }
+</script>
+</html>
