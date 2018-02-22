@@ -1,0 +1,7 @@
+1 - create func that adds 2 numbers. apply some default values if values are not provided.
+
+2 - create function that receives array of objects and searches through them.
+eg:
+var orders = [{ id: 1, user: 'Some user' }, {id: 3, user: 'third user'}];
+f(orders, 3); //true
+f(orders, 2); //false
