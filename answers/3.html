@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Task 3 - example answer</title>
+</head>
+<style>
+    div {
+        background: yellow;
+    }
+
+    .active {
+        background: blue;
+    }
+</style>
+<body>
+<div id="main">Some div</div>
+</body>
+<script>
+  var main = document.getElementById('main'); // note that div in JS is just an object
+  main.addEventListener('click', clickHandler);
+
+  function clickHandler() {
+    if(main.className !== 'active') {
+      setClass(main, 'active');
+    } else {
+      setClass(main, '');
+    }
+  }
+
+  function setClass(object, className) {
+    object.className = className;
+  }
+</script>
+</html>
