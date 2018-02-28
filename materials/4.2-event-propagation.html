@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Event propagation - what is it</title>
+</head>
+<body>
+<div id="parent">
+    Some parent div
+    <div id="child1">First child</div>
+    <div id="child2">Second child</div>
+</div>
+<script>
+  var parent = document.getElementById('parent');
+  var child1 = document.getElementById('child1');
+  var child2 = document.getElementById('child2');
+
+  parent.addEventListener('click', parentClick); // try to add third parameter as true (default is false)
+  child1.addEventListener('click', child1Click);
+  child2.addEventListener('click', child2Click);
+
+  function parentClick(event) { //each event listener receives an event object as a first property
+    alert('parent click');
+
+    if (event.target && event.target.matches("#child1")) {
+      alert('parent detected click on child 1');
+    }
+  }
+
+  function child1Click() { //note that we do not must to add event to func declaration, although it would be passed
+    alert('child 1 click');
+  }
+
+  function child2Click(event) {
+    alert('child 2 click');
+    // TRY TO UNCOMMENT THE LINE AFTER THIS AND SEE WHAT HAPPENS
+    // event.stopPropagation();
+  }
+</script>
+</body>
+</html>

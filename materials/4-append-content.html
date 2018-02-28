@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>How to Append content to html</title>
+    <style>
+        body > div {
+            border: 1px solid black;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+<div id="first"></div>
+<div id="second"></div>
+<div id="third"></div>
+<script>
+  var first = document.getElementById('first');
+  var second = document.getElementById('second');
+  var third = document.getElementById('third');
+  var count = 5, i = 0;
+  var fragment = document.createDocumentFragment();
+  var newElement;
+
+  //FIRST WAY (NOT RECOMMENDED BECAUSE OF LOW PERFORMANCE)
+  while (i < count) {
+    first.innerHTML += "<div>This is my " + i + " div inserted using innerHTML property</div>";
+    i++;
+  }
+
+  //SECOND WAY
+  i = 0;
+  while (i < count) {
+    newElement = document.createElement('div');
+    newElement.innerText = 'This is my ' + i + ' div inserted using createElement + appendChild'; //innerHTML could be used as well
+    second.appendChild(newElement);
+    i++;
+  }
+
+  //THIRD WAY
+  i = 0;
+  while (i < count) {
+    newElement = document.createElement('div');
+    newElement.innerText = 'This is my ' + i + ' div inserted using createFragment + createElement + appendChild';
+    fragment.appendChild(newElement);
+    i++;
+  }
+  third.appendChild(fragment);
+
+  /* ADDITIONAL INFO
+  Performance benchmarks:
+  1) https://jsperf.com/document-fragment-vs-innerhtml-vs-looped-appendchild
+  2) http://jsben.ch/yDvKH
+   */
+</script>
+</body>
+</html>
