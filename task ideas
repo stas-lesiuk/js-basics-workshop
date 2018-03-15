@@ -9,6 +9,6 @@ f(orders, 2); //false
 3 - show 3 methods of onclick handling. then some task regarding
 
 4.1 - display list of items using any of available methods
-4.2
+4.2 - create 2 columns with div's and move them from 1st column to second on click
 
 5 - task 4 + async
