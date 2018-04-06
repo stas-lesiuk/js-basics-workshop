@@ -4,12 +4,15 @@ const tress = require('tress');
 
 const URL = 'https://www.otomoto.pl/osobowe/volkswagen/polo/iv-2001-2009/?search%5Bfilter_float_price%3Afrom%5D=9000&search%5Bfilter_float_price%3Ato%5D=16000';
 let results = [];
+let visitedLinks = [];
+
 const selectors = {
   title: '.offer-title',
   price: '.offer-price__number',
   year: '.offer-item__params-item:nth-child(1)',
   header: '.offer-header',
-  detailPageLink: '.offer-title__link'
+  detailPageLink: '.offer-title__link',
+  pagination: '.om-pager.rel a'
 };
 
 const queue = tress(function (url, callback) {
@@ -34,6 +37,16 @@ const queue = tress(function (url, callback) {
       const href = $(this).attr('href');
       console.log('pushing link to detail page: ', href);
       queue.push(href);
+    });
+
+    //pagination
+    $(selectors.pagination).each(function () {
+      const href = $(this).attr('href');
+      console.log('pushing link to next page: ', href);
+      if(!visitedLinks.includes(href)) {
+        visitedLinks.push(href);
+        queue.push(href);
+      }
     });
 
     callback(); //callback = queue.drain at the end
