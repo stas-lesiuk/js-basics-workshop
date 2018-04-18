@@ -20,6 +20,10 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import SystemAlerts from 'components/SystemAlerts';
 
+import MenuTable from './MenuTable';
+
+import './app.scss';
+
 export class App extends React.Component {
   static propTypes = {
     app: PropTypes.object.isRequired,
@@ -27,48 +31,77 @@ export class App extends React.Component {
     user: PropTypes.object.isRequired,
   };
 
+  constructor(props) {
+    super(props);
+    this.state = {
+      orders: [],
+      sum: 0
+    };
+  }
+
   componentWillReceiveProps(nextProps) {
-    const { dispatch, user } = this.props;
-    const { user: nextUser } = nextProps;
+    const {dispatch, user} = this.props;
+    const {user: nextUser} = nextProps;
 
     /* istanbul ignore else */
     if (!user.isAuthenticated && nextUser.isAuthenticated) {
-      dispatch(showAlert('Hello! And welcome!', { type: 'success', icon: 'i-trophy' }));
+      dispatch(showAlert('Hello! And welcome!', {type: 'success', icon: 'i-trophy'}));
     }
   }
 
   render() {
-    const { app, dispatch, user } = this.props;
+    // const {app, dispatch, user} = this.props;
+    const title = 'My first React page';
+    const desc = 'I hope this will be awesome';
+    const foodTitle = 'Food menu';
+    const food = [
+      {name: 'Pizza', price: 20},
+      {name: 'Sushi', price: 120},
+      {name: 'Burger', price: 30}
+    ];
+    const drinksTitle = 'Drinks menu';
+    const drinks = [
+      {name: 'Soda', price: 5},
+      {name: 'Coke', price: 4},
+      {name: 'Beer', price: 8}
+    ];
+    const clickHandler = item =>
+      this.setState({
+        orders: this.state.orders.concat(item),
+        sum: this.state.sum + item.price
+      });
 
-    return (
-      <ConnectedRouter history={history}>
-        <div
-          className={cx('app', {
-            'app--private': user.isAuthenticated,
-          })}
-        >
-          <Helmet
-            defer={false}
-            htmlAttributes={{ lang: 'pt-br' }}
-            encodeSpecialCharacters={true}
-            defaultTitle={config.title}
-            titleTemplate={`%s | ${config.name}`}
-            titleAttributes={{ itemprop: 'name', lang: 'pt-br' }}
-          />
-          {user.isAuthenticated && <Header dispatch={dispatch} user={user} />}
-          <main className="app__main">
-            <Switch>
-              <RoutePublic isAuthenticated={user.isAuthenticated} path="/" exact component={Home} />
-              <RoutePrivate isAuthenticated={user.isAuthenticated} path="/private" component={Private} />
-              <Route component={NotFound} />
-            </Switch>
-          </main>
-          <Footer />
-          <SystemAlerts alerts={app.alerts} dispatch={dispatch} />
-        </div>
-      </ConnectedRouter>
-    );
+    return <ConnectedRouter history={history}>
+      <main>
+        <h1>{title}</h1>
+        <p>{desc}</p>
+        <MenuTable title={foodTitle} data={food} click={clickHandler}/>
+        <MenuTable title={drinksTitle} data={drinks} click={clickHandler}/>
+        <section>
+          <h2>Order list</h2>
+          <ul>
+            {
+              this.state.orders.map(order => <li>{order.name }</li>)
+            }
+          </ul>
+          <strong>Order sum: {this.state.sum}</strong>
+        </section>
+        {/*{this.renderMenuTable(foodTitle, food)}*/}
+        {/*{this.renderMenuTable(drinksTitle, drinks)}*/}
+      </main>
+    </ConnectedRouter>;
   }
+
+  // renderMenuTable(title, data) {
+  //   return <section className="menu-section">
+  //     <h2>{title}</h2>
+  //     <ul>
+  //       {
+  //         data.map(item => <li>{item.name}</li>)
+  //       }
+  //     </ul>
+  //   </section>
+  // }
 }
 
 /* istanbul ignore next */
