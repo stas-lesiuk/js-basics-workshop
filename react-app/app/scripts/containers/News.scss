@@ -1,14 +1,21 @@
+.news-wrapper {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+}
+
 .news {
   border: 1px solid black;
   padding: 10px 20px;
-  margin: 10px 1%;
+  margin: 10px 0;
 
   @media (min-width: 680px) {
     float: left;
-    width: 48%;
+    flex-basis: 48%;
   }
 
   @media (min-width: 1200px) {
-    width: 31.33%;
+    flex-basis: 31.33%;
   }
 }
