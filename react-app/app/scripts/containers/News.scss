@@ -1,0 +1,14 @@
+.news {
+  border: 1px solid black;
+  padding: 10px 20px;
+  margin: 10px 1%;
+
+  @media (min-width: 680px) {
+    float: left;
+    width: 48%;
+  }
+
+  @media (min-width: 1200px) {
+    width: 31.33%;
+  }
+}
