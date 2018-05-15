@@ -20,6 +20,7 @@ import Header from 'components/Header';
 import Footer from 'components/Footer';
 import SystemAlerts from 'components/SystemAlerts';
 
+import Navbar from './Navbar';
 import MenuTable from './MenuTable';
 
 import './app.scss';
@@ -73,6 +74,7 @@ export class App extends React.Component {
 
     return <ConnectedRouter history={history}>
       <main>
+        <Navbar/>
         <h1>{title}</h1>
         <p>{desc}</p>
         <MenuTable title={foodTitle} data={food} click={clickHandler}/>

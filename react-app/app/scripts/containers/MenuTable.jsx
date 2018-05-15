@@ -1,5 +1,7 @@
 import React from 'react';
 
+import './MenuTable.scss';
+
 export function MenuTableF(props) {
   return <section className="menu-section">
     <h2>{props.title}</h2>
@@ -21,7 +23,7 @@ const MenuTable = props => {
           return <li key={index}>
             <span>{item.name}</span>
             <span>{item.price}</span>
-            <button className="btn btn-danger" type="button" onClick={onClickHandler}>Buy</button>
+            <button className="btn btn-danger order-btn" type="button" onClick={onClickHandler}>Buy</button>
             </li>;
         })
       }
